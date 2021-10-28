@@ -3,6 +3,10 @@ import { $, ElementFinder } from 'protractor';
 export class ProductAddedModalPage {
   private checkOutButton: ElementFinder;
 
+  public getCheckoutButton(): ElementFinder {
+    return this.checkOutButton;
+  }
+
   constructor() {
     this.checkOutButton = $('[style*="display: block;"] .button-container > a');
   }

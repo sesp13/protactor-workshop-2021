@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, ExpectedConditions as EC } from 'protractor';
 import {
   MenuContentPage,
   ProductListPage,
@@ -27,7 +27,15 @@ describe('Buy a t-shirt', () => {
   it('then should be bought a t-shirt', async () => {
     await browser.get('http://automationpractice.com/');
     await menuContentPage.goToTShirtMenu();
+    await browser.wait(
+      EC.elementToBeClickable(productListPage.getAddToCartButton()),
+      3000,
+    );
     await productListPage.addToCart();
+    await browser.wait(
+      EC.elementToBeClickable(productAddedModalPage.getCheckoutButton()),
+      3000,
+    );
     await productAddedModalPage.proceedToCheckOut();
     await summaryStepPage.proceedToCheckOut();
     await signInStepPage.fillForm('aperdomobo@gmail.com', 'WorkshopProtractor');
