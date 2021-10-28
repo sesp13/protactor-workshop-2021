@@ -8,7 +8,7 @@ export class ProductAddedModalPage {
   }
 
   constructor() {
-    this.checkOutButton = $('[style*="display: block;"] .button-container > a');
+    this.checkOutButton = $('#layer_cart .button-container > a');
   }
 
   public async proceedToCheckOut(): Promise<void> {

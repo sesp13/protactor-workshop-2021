@@ -6,7 +6,7 @@ export class ShippingStepPage {
   private termsButton: ElementFinder;
 
   constructor() {
-    this.checkOutButton = $('#form > p > button > span');
+    this.checkOutButton = $('.cart_navigation button');
     this.termsButton = $('#cgv');
   }
 
