@@ -24,30 +24,66 @@ describe('Buy a t-shirt', () => {
   const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
   const orderSummaryStepPage: OrderSummaryStepPage = new OrderSummaryStepPage();
 
-  it('then should be bought a t-shirt', async () => {
-    await browser.get('http://automationpractice.com/');
-    await menuContentPage.goToTShirtMenu();
-    await browser.wait(
-      EC.elementToBeClickable(productListPage.getAddToCartButton()),
-      3000,
-    );
-    await productListPage.addToCart();
-    await browser.wait(
-      EC.elementToBeClickable(productAddedModalPage.getCheckoutButton()),
-      3000,
-    );
-    await productAddedModalPage.proceedToCheckOut();
-    await summaryStepPage.proceedToCheckOut();
-    await signInStepPage.fillForm('aperdomobo@gmail.com', 'WorkshopProtractor');
-    await signInStepPage.signIn();
-    await addressStepPage.proceedToCheckOut();
-    await shippingStepPage.checkTermsButton();
-    await shippingStepPage.proceedToCheckOut();
-    await paymentStepPage.payByCheck();
-    await bankPaymentStepPage.confirmPayment();
+  describe('Open Page', () => {
+    it('Open browser', async () => {
+      await browser.get('http://automationpractice.com/');
+    });
+  });
 
-    await expect(orderSummaryStepPage.getConfirmationMessage()).toBe(
-      'Your order on My Store is complete.',
-    );
+  describe('Buy Tshirt', async () => {
+    it('Open menu page', async () => {
+      await menuContentPage.goToTShirtMenu();
+    });
+
+    it('Select a tshirt and add to cart', async () => {
+      await browser.wait(
+        EC.elementToBeClickable(productListPage.getAddToCartButton()),
+        10000,
+      );
+      await productListPage.addToCart();
+      await browser.wait(
+        EC.elementToBeClickable(productAddedModalPage.getCheckoutButton()),
+        10000,
+      );
+      await productAddedModalPage.proceedToCheckOut();
+    });
+
+    it('Go to login', async () => {
+      await summaryStepPage.proceedToCheckOut();
+    });
+  });
+
+  describe('Login in the platform', () => {
+    it('Complete login', async () => {
+      await signInStepPage.fillForm(
+        'aperdomobo@gmail.com',
+        'WorkshopProtractor',
+      );
+      await signInStepPage.signIn();
+    });
+  });
+
+  describe('Select default address', () => {
+    it('Accept default address', async () => {
+      await addressStepPage.proceedToCheckOut();
+    });
+
+    it('Accept shipping', async () => {
+      await shippingStepPage.checkTermsButton();
+      await shippingStepPage.proceedToCheckOut();
+    });
+  });
+
+  describe('Bank Payment', () => {
+    it('Pay the shirt', async () => {
+      await paymentStepPage.payByCheck();
+      await bankPaymentStepPage.confirmPayment();
+    });
+
+    it('Expect confirmation legal', async () => {
+      await expect(orderSummaryStepPage.getConfirmationMessage()).toBe(
+        'Your order on My Store is complete.',
+      );
+    });
   });
 });
