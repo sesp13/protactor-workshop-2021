@@ -38,12 +38,12 @@ describe('Buy a t-shirt', () => {
     it('Select a tshirt and add to cart', async () => {
       await browser.wait(
         EC.elementToBeClickable(productListPage.getAddToCartButton()),
-        4000,
+        10000,
       );
       await productListPage.addToCart();
       await browser.wait(
         EC.elementToBeClickable(productAddedModalPage.getCheckoutButton()),
-        4000,
+        10000,
       );
       await productAddedModalPage.proceedToCheckOut();
     });
