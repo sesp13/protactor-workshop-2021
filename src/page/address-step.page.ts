@@ -4,7 +4,7 @@ export class AddressStepPage {
   private checkOutButton: ElementFinder;
 
   constructor() {
-    this.checkOutButton = $('#center_column > form > p > button > span');
+    this.checkOutButton = $('.cart_navigation button');
   }
 
   public async proceedToCheckOut(): Promise<void> {

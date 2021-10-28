@@ -4,7 +4,7 @@ export class OrderSummaryStepPage {
   private confirmationMessage: ElementFinder;
 
   constructor() {
-    this.confirmationMessage = $('#center_column > div > p > strong');
+    this.confirmationMessage = $('.cheque-indent .dark');
   }
 
   public async getConfirmationMessage(): Promise<string> {
