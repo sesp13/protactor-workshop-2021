@@ -13,9 +13,6 @@ import {
 } from '../src/page';
 
 describe('Buy a t-shirt', () => {
-  beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
-  });
   const menuContentPage: MenuContentPage = new MenuContentPage();
   const productListPage: ProductListPage = new ProductListPage();
   const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage();
@@ -33,7 +30,7 @@ describe('Buy a t-shirt', () => {
     await menuContentPage.goToTShirtMenu();
     await browser.sleep(3000);
     await productListPage.addToCart();
-    await browser.sleep(10000);
+    await browser.sleep(3000);
     await productAddedModalPage.proceedToCheckOut();
     await browser.sleep(3000);
     await summaryStepPage.proceedToCheckOut();
